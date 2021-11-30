@@ -29,9 +29,9 @@ const Home: NextPage = () => {
   // use regexp to get the values, then make an api request with them
   const handleConvert = (inputText: string) => {
     const result = inputText.match(regexp);
-    console.log(result);
+    // console.log(result);
     if (result !== null && result.length === 3 && result[1] && result[2]) {
-      console.log("setting state");
+      // console.log("setting state");
       setCurrencyProps({
         value: +result[0].replace(/\s/g, ""),
         base: result[1],

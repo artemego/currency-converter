@@ -29,7 +29,6 @@ function useConverterService<T>(props: ICurrencyProps): {
         const res = await axios.get<any>(
           `${baseUrl}/${props.base}/${props.convertTo}.json`
         );
-        console.log(res);
         setResponse({
           baseValue: props.value,
           convertedValue: res.data[props.convertTo] * props.value,
@@ -39,7 +38,7 @@ function useConverterService<T>(props: ICurrencyProps): {
         setError(null);
         setIsLoading(false);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         setError(err as Error);
       }
     };

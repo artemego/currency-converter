@@ -9,11 +9,9 @@ import { Spinner } from "@chakra-ui/spinner";
 const Rates: NextPage = () => {
   const [baseCurrency, setBaseCurrency] = useState("rub");
   const [currencyList, setcurrencyList] = useState<any>(null);
-  // const [selectedOption, setSelectedOption] = useState<string>("");
-  const { response, error, loading } = useRatesService(baseCurrency);
+  const { response } = useRatesService(baseCurrency);
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value);
     setBaseCurrency(e.target.value);
   };
 
@@ -23,7 +21,6 @@ const Rates: NextPage = () => {
         "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies.json"
       )
       .then((res) => {
-        console.log(res);
         setcurrencyList(res.data);
       });
   }, []);
@@ -32,7 +29,7 @@ const Rates: NextPage = () => {
     <Box>
       <Box position="sticky" top="0px" backgroundColor="white">
         <Heading mb="15px" mt="15px" fontSize="26px">
-          Currency rates for {baseCurrency}
+          Currency rates for 1 {baseCurrency}
         </Heading>
         <Select
           mb="15px"
@@ -51,12 +48,14 @@ const Rates: NextPage = () => {
 
       <Box display="flex" flexDirection="row" flexWrap="wrap">
         {response ? (
-          Object.keys(response).map((key, index) => (
+          Object.keys(response).map((key) => (
             <Box
               flexBasis={["100%", "50%", "33%"]}
               textAlign="center"
               key={key}
-            >{`${key}: ${response[key as keyof typeof response]}`}</Box>
+            >{`${key}: ${(1 / response[key as keyof typeof response]).toFixed(
+              2
+            )}`}</Box>
           ))
         ) : (
           <Spinner />

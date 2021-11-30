@@ -18,12 +18,12 @@ function useRatesService<T>(baseCurrency: string): {
     const fetchData = async (): Promise<void> => {
       try {
         const res = await axios.get<any>(`${baseUrl}/${baseCurrency}.json`);
-        console.log(res);
+        // console.log(res);
         setResponse(res.data[baseCurrency]);
         setError(null);
         setIsLoading(false);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         setError(err as Error);
       }
     };
